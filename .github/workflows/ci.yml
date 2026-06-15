@@ -1,32 +1,42 @@
-name: AIOps CI
+name: AIOps CI/CD
 
 on:
   push:
     branches:
       - main
 
+  pull_request:
+    branches:
+      - main
+
 jobs:
 
-  build:
+  build-and-test:
 
     runs-on: ubuntu-latest
 
     steps:
 
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install
+      - name: Install Dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Frontend Build
+      - name: Verify Imports
         run: |
-          docker build -f docker/Dockerfile.frontend -t frontend .
+          python -c "import gradio"
+          python -c "import langgraph"
+          python -c "import openai"
+          python -c "import sqlalchemy"
 
-      - name: Backend Build
+      - name: Docker Build Validation
         run: |
-          docker build -f docker/Dockerfile.backend -t backend .
+          docker build -t aiops-platform .
