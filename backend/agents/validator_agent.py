@@ -4,8 +4,8 @@ from backend.services.llm_service import get_llm
 from backend.prompts.validator_prompt import (
     VALIDATOR_PROMPT
 )
-
-
+from langsmith import traceable
+@traceable(name="validate_incident")
 def validate_incident(
     root_cause,
     recommendations

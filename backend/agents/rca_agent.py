@@ -2,8 +2,9 @@ import json
 
 from backend.services.llm_service import get_llm
 from backend.prompts.rca_prompt import RCA_PROMPT
+from langsmith import traceable
 
-
+@traceable(name="generate_rca")
 def generate_rca(
     incident,
     historical_context

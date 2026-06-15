@@ -1,12 +1,12 @@
 # backend/agents/log_analyzer.py
-
+from langsmith import traceable
 import json
 
 from backend.services.llm_service import get_llm
 from backend.prompts.log_prompt import LOG_ANALYZER_PROMPT
 from backend.schemas.log_analysis import LogAnalysis
 
-
+@traceable(name="analyze_log")
 def analyze_log(log_text: str):
 
     client = get_llm()

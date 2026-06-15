@@ -9,6 +9,8 @@ langsmith
 langgraph-checkpoint-postgres
 psycopg-binary
 openai
+langchain-openai
+langchain-openai
 
 sqlalchemy
 psycopg2-binary

@@ -4,7 +4,8 @@ from backend.services.llm_service import get_llm
 from backend.prompts.recommendation_prompt import (
     RECOMMENDATION_PROMPT
 )
-
+from langsmith import traceable
+@traceable(name="generate_recommendations")
 
 def generate_recommendations(root_cause):
 
