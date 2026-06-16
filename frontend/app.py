@@ -321,10 +321,12 @@ with gr.Blocks(
     ]
 )
 
+
+# run the application
 import os
 
-
-demo.launch(
-    server_name="0.0.0.0",
-    server_port=int(os.getenv("PORT", 7860))
-)
+if __name__ == "__main__":
+    demo.launch(
+        server_name=os.getenv("SERVER_NAME", "127.0.0.1"),
+        server_port=int(os.getenv("PORT", 7860))
+    )
